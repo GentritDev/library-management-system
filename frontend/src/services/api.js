@@ -1,6 +1,25 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+// Default endpoints
+const DEFAULT_LOCAL_API = "http://localhost:5000/api";
+const DEFAULT_PROD_API = "https://library-management-system-production-5012.up.railway.app/api";
+
+// Resolve and validate VITE_API_URL
+const rawApiUrl = import.meta.env.VITE_API_URL;
+let API_URL;
+if (rawApiUrl) {
+  if (typeof rawApiUrl === 'string' && (rawApiUrl.startsWith('http://') || rawApiUrl.startsWith('https://'))) {
+    API_URL = rawApiUrl;
+  } else {
+    console.warn('VITE_API_URL is set but looks invalid:', rawApiUrl, '\nFalling back to defaults.');
+    API_URL = import.meta.env.MODE === 'development' ? DEFAULT_LOCAL_API : DEFAULT_PROD_API;
+  }
+} else {
+  // Not set: choose sensible default based on mode and log a helpful message
+  API_URL = import.meta.env.MODE === 'development' ? DEFAULT_LOCAL_API : DEFAULT_PROD_API;
+  console.warn('VITE_API_URL is not set. Using fallback API URL:', API_URL);
+}
+
 // Create axios instance
 const api = axios.create({
   baseURL: API_URL,
