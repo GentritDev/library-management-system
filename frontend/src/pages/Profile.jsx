@@ -102,9 +102,10 @@ const Profile = () => {
         setSummaryStats(null);
         
         
-        // Use absolute URL with auth header
+         // Use environment-based API URL
+        const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
         const response = await axios.get(
-            'http://localhost:5000/api/ai/summary',
+            `${API_URL}/ai/summary`,
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`,
