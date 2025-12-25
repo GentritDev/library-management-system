@@ -3,7 +3,6 @@
 🔗 **Live Frontend:** [LIVE DEMO](https://library-management-system-ten-dun.vercel.app/)  
 🔗 **Backend API:** [library-management-system-production-5012.up.railway.app]  
 🔗 **Github Repo:** [https://github.com/GentritDev/library-management-system]  
-🔗 **Backend Repo:** [ADD GITHUB LINK HERE]
 
 ---
 
